@@ -43,7 +43,7 @@ DATABASE_URL='...' npm run db:provision-neon
 |----------|--------|
 | `DATABASE_URL` | Neon connection string |
 | `JWT_SECRET` | Long random string (32+ chars) |
-| `CLIENT_URL` | `https://your-app.vercel.app` |
+| `CLIENT_URL` | `https://tjconsultant-azure.vercel.app` |
 | `NODE_ENV` | `production` |
 
 4. Deploy. Note the API URL, e.g. `https://tj-fms-api.onrender.com`.
@@ -72,7 +72,7 @@ Expected JSON includes `database: "neon-postgres"` and `currency: "USD"`.
 
 | Variable | Example |
 |----------|---------|
-| `VITE_API_URL` | `https://tj-fms-api.onrender.com/api` |
+| `VITE_API_URL` | `https://tj-fms-api.onrender.com/api` (must include `/api`) |
 
 3. Deploy — build runs `build:vercel` (Vite + `api-config.js`).
 
@@ -106,9 +106,35 @@ Expected JSON includes `database: "neon-postgres"` and `currency: "USD"`.
 
 ---
 
+## Production URLs (TJ Consultancy)
+
+| Service | URL |
+|---------|-----|
+| Frontend | https://tjconsultant-azure.vercel.app |
+| API | https://tj-fms-api.onrender.com |
+
+Quick checks:
+
+```bash
+curl https://tj-fms-api.onrender.com/api/health
+curl -X POST https://tj-fms-api.onrender.com/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"admin@tjconsultancy.com","password":"Admin@TJ2026"}'
+```
+
+After Vercel redeploy, proxy check (optional fallback):
+
+```bash
+curl https://tjconsultant-azure.vercel.app/api/health
+```
+
+---
+
 ## Troubleshooting
 
-**CORS errors** — Set `CLIENT_URL` on the API to your Vercel URL (with `https://`, no trailing slash).
+**Login fails / "Request failed" / invalid response** — Most common cause: `VITE_API_URL` set without the `/api` suffix (e.g. `https://tj-fms-api.onrender.com`). The app must call `…/api/auth/login`, not `…/auth/login`. Set `VITE_API_URL=https://tj-fms-api.onrender.com/api` and redeploy Vercel. Recent builds also auto-append `/api` in code and via `vercel.json` proxy rewrites.
+
+**CORS errors** — Set `CLIENT_URL` on Render to `https://tjconsultant-azure.vercel.app` (no trailing slash). All `*.vercel.app` domains are allowed automatically.
 
 **API returns 500** — Check Render logs; confirm `DATABASE_URL` is set and Neon provision ran.
 
