@@ -1,0 +1,29 @@
+{
+  "name": "tj-consultancy-fms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TJ Consultancy Inc. – Web-Based Financial Management System",
+  "engines": {
+    "node": ">=18"
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev -w server\" \"npm run dev -w client\"",
+    "dev:server": "npm run dev -w server",
+    "dev:client": "npm run dev -w client",
+    "build": "npm run build -w client",
+    "build:vercel": "npm run build -w client && node scripts/prepare-vercel.mjs",
+    "start": "npm run start -w server",
+    "start:prod": "NODE_ENV=production npm run start -w server",
+    "db:init": "npm run db:init -w server",
+    "db:seed": "npm run db:seed -w server",
+    "db:patch-usd": "npm run db:patch-usd -w server",
+    "db:provision-neon": "npm run db:provision-neon -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

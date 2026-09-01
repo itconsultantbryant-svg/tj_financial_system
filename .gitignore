@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+*.db
+*.sqlite
+*.db-shm
+*.db-wal
+server/data/
+.DS_Store
+uploads/
+.vercel
+*.log
