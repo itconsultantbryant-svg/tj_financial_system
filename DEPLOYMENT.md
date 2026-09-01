@@ -59,21 +59,24 @@ Expected JSON includes `database: "neon-postgres"` and `currency: "USD"`.
 
 ## 3. Frontend (Vercel)
 
-1. [Vercel Dashboard](https://vercel.com) → **Add New Project** → import GitHub repo.
-2. Framework preset: **Other** (uses `vercel.json`).
-3. **Environment Variables** (Production + Preview):
+1. [Vercel Dashboard](https://vercel.com) → **Add New Project** → import `tj_financial_system`.
+
+**Root Directory** (either works):
+
+| Option | Root Directory | Output |
+|--------|----------------|--------|
+| Recommended | `.` (repo root) | `client/dist` |
+| Alternative | `client` | `dist` |
+
+2. **Environment Variables** (Production + Preview):
 
 | Variable | Example |
 |----------|---------|
 | `VITE_API_URL` | `https://tj-fms-api.onrender.com/api` |
 
-4. Deploy.
+3. Deploy — build runs `build:vercel` (Vite + `api-config.js`).
 
-The build runs `npm run build:vercel`, which:
-- Builds the React app to `client/dist`
-- Injects `api-config.js` with your API URL
-
-5. After first deploy, update Render `CLIENT_URL` to your exact Vercel URL and redeploy the API if needed.
+4. Update Render `CLIENT_URL` to your Vercel URL after first deploy.
 
 ---
 
