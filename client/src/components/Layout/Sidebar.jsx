@@ -44,7 +44,7 @@ const NAV_SECTIONS = [
   },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen = false, onNavigate }) {
   const { tenant, user } = useAuth();
   const logo = tenant?.logoUrl || BRAND.logoUrl;
   const name = tenant?.name || BRAND.name;
@@ -55,22 +55,25 @@ export default function Sidebar() {
     : NAV_SECTIONS;
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar${isOpen ? ' sidebar-open' : ''}`} aria-label="Main navigation">
       <div className="sidebar-brand">
-        <img src={logo} alt={name} />
+        <img src={logo} alt="" aria-hidden="true" />
         <h1>{name}</h1>
         <p>{tenant?.tagline || BRAND.tagline}</p>
       </div>
-      <nav className="sidebar-nav">
+      <nav className="sidebar-nav" aria-label="Application sections">
         {sections.map((section) => (
           <div key={section.title} className="nav-section">
-            <p className="nav-section-title">{section.title}</p>
+            <p className="nav-section-title" id={`nav-section-${section.title.replace(/\s+/g, '-').toLowerCase()}`}>
+              {section.title}
+            </p>
             {section.links.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
                 end={link.end}
                 className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+                onClick={onNavigate}
               >
                 {link.label}
               </NavLink>

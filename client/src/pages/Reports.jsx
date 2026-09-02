@@ -34,11 +34,13 @@ export default function ReportsPage() {
         <p>IS, BS, CF, per-customer and per-service P&amp;L with drill-down</p>
       </div>
 
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+      <div className="tab-bar" role="tablist" aria-label="Report types">
         {tabs.map((t) => (
           <button
             key={t.id}
             type="button"
+            role="tab"
+            aria-selected={tab === t.id}
             className={`btn ${tab === t.id ? 'btn-primary' : 'btn-outline'}`}
             onClick={() => setTab(t.id)}
           >

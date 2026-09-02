@@ -24,7 +24,14 @@ export default function BankingPage() {
       <div className="card mb-1">
         <h3 className="card-title">Import Bank Transactions (CSV rows)</h3>
         <p className="text-muted">Paste JSON array: [{`{"date":"2026-08-01","amount":500,"description":"Deposit"}`}]</p>
-        <textarea id="import-json" rows={3} style={{ width: '100%', marginBottom: '0.5rem' }} placeholder='[{"date":"2026-08-01","amount":500,"description":"Wire in"}]' />
+        <div className="form-group mb-1">
+          <label htmlFor="import-json">Transaction JSON</label>
+          <textarea
+            id="import-json"
+            rows={3}
+            placeholder='[{"date":"2026-08-01","amount":500,"description":"Wire in"}]'
+          />
+        </div>
         <button
           type="button"
           className="btn btn-secondary"

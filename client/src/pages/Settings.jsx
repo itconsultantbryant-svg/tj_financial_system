@@ -49,8 +49,8 @@ export default function SettingsPage() {
       <div className="grid-2">
         <div className="card">
           <h3 className="card-title">Company &amp; Locale</h3>
-          <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-            <img src={display.logoUrl || BRAND.logoUrl} alt="Logo" style={{ maxWidth: 120 }} />
+          <div className="settings-logo-wrap">
+            <img src={display.logoUrl || BRAND.logoUrl} alt={`${display.name || BRAND.name} logo`} />
           </div>
           <table className="data-table">
             <tbody>
@@ -62,7 +62,7 @@ export default function SettingsPage() {
                 <td>Currency</td>
                 <td>
                   <span className="badge badge-success">USD</span>
-                  <span className="text-muted" style={{ marginLeft: '0.5rem' }}>Locked — Liberia operations use USD</span>
+                  <span className="text-muted ml-1">Locked — Liberia operations use USD</span>
                 </td>
               </tr>
               <tr><td>Locale</td><td>{display.locale || BRAND.locale}</td></tr>
@@ -89,7 +89,7 @@ export default function SettingsPage() {
               {saving ? 'Saving…' : 'Save Settings'}
             </button>
           </form>
-          <ul style={{ margin: '1rem 0', paddingLeft: '1.25rem' }} className="text-muted">
+          <ul className="settings-list text-muted">
             <li>Fiscal year: January–December</li>
             <li>All financial amounts displayed in US Dollars (USD)</li>
             <li>No NGN or other currencies — USD only</li>

@@ -26,7 +26,7 @@ import PortalPage from './pages/Portal';
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
-  if (loading) return <div className="login-page">Loading...</div>;
+  if (loading) return <div className="loading-page" role="status" aria-live="polite">Loading...</div>;
   if (!user) return <Navigate to="/login" replace />;
   return children;
 }

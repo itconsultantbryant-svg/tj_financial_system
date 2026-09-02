@@ -33,27 +33,34 @@ export default function LoginPage() {
 
   return (
     <div className="login-page">
-      <div className="login-card">
+      <main className="login-card" aria-labelledby="login-heading">
         <div className="login-brand">
-          <img src={BRAND.logoUrl} alt={BRAND.name} />
-          <h1>{BRAND.name}</h1>
+          <img src={BRAND.logoUrl} alt={`${BRAND.name} logo`} />
+          <h1 id="login-heading">{BRAND.name}</h1>
           <p>Financial Management System v1.0</p>
         </div>
-        {error && <div className="alert alert-error">{error}</div>}
-        <form onSubmit={handleSubmit}>
+        {error && (
+          <div className="alert alert-error" role="alert" aria-live="polite">
+            {error}
+          </div>
+        )}
+        <form onSubmit={handleSubmit} noValidate>
           <div className="form-group mb-1">
-            <label>Email</label>
+            <label htmlFor="login-email">Email</label>
             <input
+              id="login-email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
+              inputMode="email"
             />
           </div>
           <div className="form-group mb-1">
-            <label>Password</label>
+            <label htmlFor="login-password">Password</label>
             <input
+              id="login-password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -61,15 +68,16 @@ export default function LoginPage() {
               autoComplete="current-password"
             />
           </div>
-          <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }} disabled={loading}>
+          <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
-        <p className="text-muted mt-1" style={{ fontSize: '0.75rem', textAlign: 'center' }}>
-          Admin: admin@tjconsultancy.com / Admin@TJ2026<br />
+        <p className="text-muted login-hint">
+          Admin: admin@tjconsultancy.com / Admin@TJ2026
+          <br />
           Portal: accounts@banka.com / Customer@TJ2026
         </p>
-      </div>
+      </main>
     </div>
   );
 }
